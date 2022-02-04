@@ -56,4 +56,10 @@ class OrdersController < ApplicationController
     order
   end
 
+  def order_subtotal_cents
+    @order = Order.find(params[:id])
+    @order.line_items.map {|entry| entry.total_price_cents}.sum
+  end
+  helper_method :order_subtotal_cents
+
 end

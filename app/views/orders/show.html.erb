@@ -1,4 +1,4 @@
-<section class="orders-show">
+<section class="orders-show" style="display: flex; align-items: center; flex-direction: column;">
 
   <header class="page-header">
     <h1>Order #<%= @order.id %></h1>
@@ -8,6 +8,20 @@
     <h4>Thank you for your order!</h4>
   </div>
 
+  <div class="order-details">
+    <% @order.line_items.each do |item| %>
+      <%= render 'line_item', product: item.product, quantity: item.quantity.to_i %>
+    
+    <% end %>
+  </div> 
+  <tr>
+          <th colspan="4">
+            TOTAL:
+          </th>
+          <th>
+            <%= humanized_money_with_symbol order_subtotal_cents / 100.0 %>
+          </th>
+        </tr>
   <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
 
 </section>
